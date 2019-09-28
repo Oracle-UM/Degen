@@ -21,15 +21,20 @@ auto main(int argc, char* argv[]) -> int {
         return 1;
     }
 
-    auto rng = UniformDistRNG(1, 100);
-    for (auto it = argv[1]; *it; ++it) {
-        auto const c = *it;
-        if (rng() < 50) {
-            *it = tolower(c);
-        } else {
-            *it = toupper(c);
+    for (auto i = 1; i < argc; ++i) {
+        auto rng = UniformDistRNG(1, 100);
+        for (auto it = argv[i]; *it; ++it) {
+            auto const c = *it;
+            if (rng() < 50) {
+                *it = tolower(c);
+            } else {
+                *it = toupper(c);
+            }
         }
     }
-
-    std::cout << argv[1];
+    for (auto i = 1; i < argc - 1; ++i) {
+        std::cout << argv[i] << ' ';
+    }
+    std::cout << argv[argc - 1];
+    std::cout << '\n';
 }
